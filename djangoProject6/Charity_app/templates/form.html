@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Formularz przekazania darów{% endblock %}
+
+{% block content %}
+    <section class="form--steps">
+        <div class="form--steps-instructions">
+            <div class="form--steps-container">
+                <h3>Ważne!</h3>
+                <p data-step="1" class="active">
+                    Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy
+                    wiedzieć komu najlepiej je przekazać.
+                </p>
+                <p data-step="2">
+                    Uzupełnij szczegóły dotyczące Twoich rzeczy. Dzięki temu będziemy
+                    wiedzieć komu najlepiej je przekazać.
+                </p>
+                <p data-step="3">
+                    Wybierz jedną, do której trafi Twoja przesyłka.
+                </p>
+                <p data-step="4">Podaj adres oraz termin odbioru rzeczy.</p>
+            </div>
+        </div>
+
+        <div class="form--steps-container">
+            <div class="form--steps-counter">Krok <span>1</span>/5</div>
+
+            <form action="form-confirmation.html" method="post">
+                <!-- STEP 1: class .active is switching steps -->
+                <div data-step="1" class="active">
+                    <h3>Zaznacz co chcesz oddać:</h3>
+
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="categories"
+                                value="clothes-to-use"
+                            />
+                            <span class="checkbox"></span>
+                            <span class="description"
+                                >ubrania, które nadają się do ponownego użycia</span
+                            >
+                        </label>
+                    </div>
+
+                    <!-- Pozostałe opcje checkbox -->
+
+                    <div class="form-group form-group--buttons">
+                        <button type="button" class="btn next-step">Dalej</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div data-step="2">
+                    <h3>Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
+
+                    <div class="form-group form-group--inline">
+                        <label>
+                            Liczba 60l worków:
+                            <input type="number" name="bags" step="1" min="1" />
+                        </label>
+                    </div>
+
+                    <!-- Pozostałe opcje dla tego kroku -->
+
+                    <div class="form-group form-group--buttons">
+                        <button type="button" class="btn prev-step">Wstecz</button>
+                        <button type="button" class="btn next-step">Dalej</button>
+                    </div>
+                </div>
+
+                <!-- Pozostałe kroki -->
+
+            </form>
+        </div>
+    </section>
+{% endblock %}
