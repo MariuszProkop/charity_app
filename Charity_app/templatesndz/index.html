@@ -9,14 +9,13 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
   </head>
   <body>
-  {% block header %}
     <header class="header--main-page">
       <nav class="container container--70">
         <ul class="nav--actions">
           <li><a href="" class="btn btn--small btn--without-border">Zaloguj</a></li>
           <li><a href="#" class="btn btn--small btn--highlighted">Załóż konto</a></li>
         </ul>
-        {% block ul %}
+
         <ul>
           <li><a href="" class="btn btn--without-border active">Start</a></li>
           <li><a href="#steps" class="btn btn--without-border">O co chodzi?</a></li>
@@ -25,9 +24,8 @@
           <li><a href="form.html" class="btn btn--without-border">Przekaż dary</a></li>
           <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
-            {% endblock %}
       </nav>
-      {% block slogan %}
+
       <div class="slogan container container--90">
         <div class="slogan--item">
           <h1>
@@ -36,11 +34,8 @@
           </h1>
         </div>
       </div>
-          {% endblock %}
     </header>
-  {% endblock %}
 
-   {% block section %}
     <section id="stats" class="stats">
       <div class="container container--85">
         <div class="stats--item">
@@ -57,8 +52,7 @@
 
       </div>
     </section>
-  {% endblock %}
-    {% block section2 %}
+
     <section id="steps" class="steps">
       <h2>Wystarczą 4 proste kroki</h2>
 
@@ -87,10 +81,7 @@
 
       <a href="#" class="btn btn--large">Załóż konto</a>
     </section>
-  {% endblock %}
 
-
-    {% block section3 %}
     <section id="about-us" class="about-us">
       <div class="about-us--text">
         <h2>O nas</h2>
@@ -99,10 +90,7 @@
       </div>
       <div class="about-us--image"><img src="images/about-us.jpg" alt="People in circle" /></div>
     </section>
-        {% endblock %}
 
-
-  {% block section4 %}
      <section id="help" class="help">
       <h2>Komu pomagamy?</h2>
 
@@ -240,9 +228,7 @@
         -->
       </div>
     </section>
-      {% endblock %}
 
-    {% block section5 %}
     <footer>
       <div id="contact" class="contact">
         <h2>Skontaktuj się z nami</h2>
@@ -264,7 +250,6 @@
         </div>
       </div>
     </footer>
-  {% endblock %}
 
     <script src="{% static 'js/app.js' %}"></script>
   </body>
