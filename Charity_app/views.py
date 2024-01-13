@@ -1,8 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView
+from django.contrib.auth.forms import get_user_model
 
 from Charity_app.models import Institution, Category, Donation
 
@@ -28,10 +30,10 @@ class LoginView(View):
         return render(request, 'login.html')
 
 
-class RegisterView(CreateView):
-    form_class = UserCreationForm
-    template_name = 'register.html'
-    success_url = '/'
+class RegisterView(UserCreationForm):
+    class Meta:
+        model = get_user_model()
+        #fields = ('name', 'surname', 'email', 'password1', 'password2')
 
 class ConfirmationView(View):
     def get(self, request):

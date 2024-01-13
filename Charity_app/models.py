@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -37,7 +37,11 @@ class Donation(models.Model):
     pick_up_date = models.DateField()
     pick_up_time = models.TimeField()
     pick_up_comment = models.TextField()
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(AbstractUser, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'Donation {self.id}'
+
+class CustomUser(AbstractUser):
+    name = models.CharField(max_length=255)
+    surname = models.CharField(max_length=255)
