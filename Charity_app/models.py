@@ -1,5 +1,7 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 # Create your models here.
@@ -41,3 +43,30 @@ class Donation(models.Model):
 
     def __str__(self):
         return f'Donation {self.id}'
+
+
+from django.db import models
+from django.contrib.auth.models import User
+
+
+class Profile(AbstractUser):
+    name = models.CharField(max_length=255)
+    surname = models.CharField(max_length=255)
+
+    @receiver(post_save, sender='auth.User')
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender='auth.User')
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'
+
+

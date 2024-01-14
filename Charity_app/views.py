@@ -1,9 +1,12 @@
+from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Sum
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView
 
+from Charity_app.forms import RegistrationForm
 from Charity_app.models import Institution, Category, Donation
 
 
@@ -29,9 +32,15 @@ class LoginView(View):
 
 
 class RegisterView(CreateView):
-    form_class = UserCreationForm
+    form_class = RegistrationForm
     template_name = 'register.html'
-    success_url = '/'
+    success_url = reverse_lazy('index')
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        login(self.request, self.object)
+        return response
+
 
 class ConfirmationView(View):
     def get(self, request):
