@@ -27,6 +27,9 @@ class Institution(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Instytutions"
+
 
 class Donation(models.Model):
     quantity = models.PositiveIntegerField()

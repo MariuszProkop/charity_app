@@ -1,13 +1,9 @@
-from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.shortcuts import render
-from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView
-
-
-from Charity_app.models import Institution, Category, Donation
+from Charity_app.models import Institution, Donation, Category
 
 
 class LandingPageView(View):
@@ -28,11 +24,17 @@ class LandingPageView(View):
             'total_bags': total_bags,
             'fundacje': fundacje,
             'zbiorki_lokalne': zbiorki_lokalne,
-            'organizacje': organizacje,})
+            'organizacje': organizacje})
 
-class AddDonationView(View):
+
+class AddDonationView(LoginRequiredMixin, View):
+    login_url = '/login/'
+
     def get(self, request):
-        return render(request, 'form.html')
+        category = Category.objects.filter(institution=None)
+        institutions = Institution.objects.all()
+        return render(request, 'form.html', {'category': category,
+                                             'institutions': institutions})
 
 
 class LoginView(View):
@@ -48,3 +50,8 @@ class RegisterView(View):
 class ConfirmationView(View):
     def get(self, request):
         return render(request, 'form-confirmation.html')
+
+
+@login_required
+def user_profile(request):
+    return render(request, 'user_profile.html')
